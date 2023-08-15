@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/userinterface.css">
+    <title>Bindass Play</title>
+</head>
+<body>
+
+
+        <div class="container">
+            <div class="content">
+                <header>
+                    <div class="header ftitle">
+                        BINDAS PLAY WIN
+                    </div>
+                    
+                    
+                    <div class="subheader">
+                        <a href="/adminlogin" class="adminBtn">Admin</a>
+                    </div>
+                    
+                </header>
+                
+                {% if row %}
+                    <div class="notification" >
+                        <div class="notice">
+                            Notice!
+                        </div>
+                        <strong>
+                            {{row}}
+                        </strong>
+                    </div>
+                {% endif %}
+        
+                <div class="result" >
+                    For Bindas Results Click Here
+                    <a href="/displayresult">
+                        BINDAS PLAY WIN
+                    </a>   
+                </div>
+
+                <div class="result" >
+                    For Kalyan Results Click Here
+                    <a href="/displayresultkalyan" style="background-color: #16e9e3;">
+                        KALYAN PLAY WIN
+                    </a>   
+                </div>
+        
+                <main>
+                    
+                    <div class="form" >
+                        
+                            <div class="form-header">
+                                <h3>USER LOGIN</h3>
+                            </div>
+                            <div class="main-form">
+                                    <form method="post" action="/userlogin" >
+                                        {% csrf_token %}
+                                        <div class="result" style="color: red;">
+                                            <strong>{{msg}}</strong>
+                                        </div>
+                                        <div class="email">
+                                          <label class="label">Username</label>
+                                          <div class="control">
+                                            <input class="input" type="text" name="username" id="username">
+                                          </div>
+                                        </div>
+                                      
+                                        <div class="pass">
+                                          <label class="label">Password</label>
+                                          <div class="control">
+                                            <input class="input" name="pass1" id="pass1" type="password" placeholder="********">
+                                          </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <button class="saveBtn">Login</button>
+                                        </div>
+                                        
+                                    </form>
+                                </div> 
+                        </div>
+                    </div>
+
+                    {% if messages %}
+                    <div id="alert-message" class="alert">
+                        <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                </main>
+                <div class="disclaimer">
+                    <div class="disclaimer-header">
+                        -: Disclaimer :-
+                    </div>
+                    <div class="content">
+                        We strictly recommend you to please visit and browse this site on your own risk. All the information availabe is strictly for informational purposes and based on astrology and numerology calculations. we are no way associated or affiliated with any illegal Matka business. We abide by rules and regulations of the regions where you are accessing the website. May be it is illegal or banned in your region. If you are using our website despite ban, you will be solely responsible for the damage or loss occured or legalaction taken. Please leave our website immediately if you don't like our disclaimer. Copying any information/content posted on the website is strictly prohibited and against the law.
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+        
+        <script>
+            // JavaScript code to display the alert pop-up
+            document.addEventListener('DOMContentLoaded', function() {
+                const alertMessage = document.getElementById('alert-message');
+                if (alertMessage) {
+                    const messageList = alertMessage.querySelector('ul');
+                    if (messageList && messageList.childElementCount > 0) {
+                        const messages = messageList.getElementsByTagName('li');
+                        let alertText = '';
+                        for (let i = 0; i < messages.length; i++) {
+                            alertText += messages[i].innerText + '\n';
+                        }
+                        alert(alertText.trim());
+                    }
+                }
+            });
+        </script>
+
+        
+    
+</body>
+</html>

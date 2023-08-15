@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/displayresult.css">
+    <title>KALYAN Play</title>
+</head>
+<body>
+    <div class="container" style="background-color: rgb(13 187 239 / 86%);">
+        <header style="background-color: rgb(249 142 0 / 89%);">
+            <div class="header ftitle" style="color: rgb(54 10 186);">
+                KALYAN PLAY WIN
+            </div>
+            
+            <form action="/searchAllkalyan">
+                <div class="subheader">
+                    <div class="subheader-title">
+                        Select Date
+                    </div>
+                    <div class="InputDate">
+                        <input type="date" name="date">
+                    </div>
+                    <div class="Btn">
+                        <button>Show Results</button>
+                    </div>
+                </div>
+            </form>
+            
+        </header>
+
+        <main>
+            {% if rows %}
+            <table>
+                <thead>
+                    <tr>
+                        <th style="background: #a200ff;">Time</th>
+                        <th style="background: #00eba7;">Kalyan A-11</th>
+                        <th style="background: #e419af;">Kalyan B-22</th>
+                        <th style="background: #11b7ff;">Kalyan C-55</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td col="1">{{row.3}}</td>
+                            <td col="1">{{row.0}}</td>
+                            <td col="1">{{row.1}}</td>
+                            <td col="1">{{row.2}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+            {% else %}
+                <div class="text-center">Result not found for this Date</div>
+            {% endif %}
+            
+        </main>
+        
+    </div>
+</body>
+</html>

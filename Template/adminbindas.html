@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <title>Bindass Play</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header ftitle">
+                BINDASS PLAY WIN
+            </div>
+            
+            <form action="/searchAll">
+                <div class="subheader">
+                    <div class="subheader-title">
+                        Select Date
+                    </div>
+                    <div class="InputDate">
+                        <input type="date" name="date">
+                    </div>
+                    <div class="Btn">
+                        <button>Show Results</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="subheader2">
+                <a href="/notification">Add Notification</a>
+            </div>
+            
+        </header>
+
+        <main>
+            <table class="switches">
+                
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="/atypeSubmit1" id="btn1">
+                                Automatic
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/atypeSubmit2" id="btn2">
+                                Automatic
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/atypeSubmit3" id="btn3">
+                                Automatic
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="background: yellow;">Time</th>
+                        <th style="background: orange;">Bindass A-11</th>
+                        <th style="background: lightgreen;">Bindass B-22</th>
+                        <th style="background: pink;">Bindass C-55</th>
+                    </tr>
+                </thead>
+                <form action="/asaveresult">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select name="time" class="Select">
+                                    <option value="10:00">10:00am</option>
+                                    <option value="10:30">10:30am</option>
+                                    <option value="11:00">11:00am</option>
+                                    <option value="11:30">11:30am</option>
+                                    <option value="12:00">12:00pm</option>
+                                    <option value="12:30">12:30pm</option>
+                                    <option value="13:00">1:00pm</option>
+                                    <option value="13:30">1:30pm</option>
+                                    <option value="14:00">2:00pm</option>
+                                    <option value="14:30">2:30pm</option>
+                                    <option value="15:00">3:00pm</option>
+                                    <option value="15:30">3:30pm</option>
+                                    <option value="16:00">4:00pm</option>
+                                    <option value="16:30">4:30pm</option>
+                                    <option value="17:00">5:00pm</option>
+                                    <option value="17:30">5:30pm</option>
+                                    <option value="18:00">6:00pm</option>
+                                    <option value="18:30">6:30pm</option>
+                                    <option value="19:00">7:00pm</option>
+                                    <option value="19:30">7:30pm</option>
+                                    <option value="20:00">8:00pm</option>
+                                    <option value="20:30">8:30pm</option>
+                                    <option value="21:00">9:00pm</option>
+                                    <option value="21:30">9:30pm</option>
+                                    <option value="22:00">10:00pm</option>
+                                    
+                                </select>
+                            </td>
+                            <td>
+                                <input class="numberInput" type="number" min="00" max="99" name="number1" id="n1" >
+                            </td>
+                            <td>
+                                <input class="numberInput" type="number" min="00" max="99" name="number2" id="n2" >
+                            </td>
+                            <td>
+                                <input class="numberInput" type="number" min="00" max="99" name="number3" id="n3" >
+                            </td>
+                        </tr>
+                        <tr >
+                            <td colspan="4">
+                                <button type="submit" class="saveBtn">Save</button>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+        
+                </form>
+            </table>
+            <div class="status">
+                {% if status %}
+                    <div style="color: green;">
+                        Result Saved
+                    </div>
+                {% elif status %}
+                    <div style="color: red;">
+                        Fail to Save Result
+                    </div>
+                {% endif %}
+            </div>
+        </main>
+        
+    </div>
+<script>
+    let btn1 = document.querySelector('#btn1');
+    let btn2 = document.querySelector('#btn2');
+    let btn3 = document.querySelector('#btn3');
+    var date = new Date();
+	var current_time = date.getHours()
+    console.log(current_time)
+    if(current_time==1){
+        localStorage.setItem("type1","Manual");
+        localStorage.setItem("type2","Manual");
+        localStorage.setItem("type3","Manual");
+    }
+    window.addEventListener('load', () =>{
+        let type1 = localStorage.getItem("type1")
+        if(type1=="Automatic"){
+            btn1.text = 'Automatic';
+        }else{
+            btn1.text = 'Manual';
+        }
+    });
+    window.addEventListener('load', () =>{
+        let type2 = localStorage.getItem("type2")
+        if(type2=="Automatic"){
+            btn2.text ='Automatic';
+        }else{
+            btn2.text = 'Manual';
+        }
+    });
+    window.addEventListener('load', () =>{
+        let type3 = localStorage.getItem("type3")
+        if(type3=="Automatic"){
+            btn3.text = 'Automatic';
+        }else{
+            btn3.text= 'Manual';
+        }
+    });
+    btn1.addEventListener('click', () =>{
+        let type1 = localStorage.getItem("type1")
+        if(type1=="Automatic"){
+            localStorage.setItem("type1","Manual")
+            btn1.text = 'Manual';
+        }else{
+            localStorage.setItem("type1","Automatic")
+            btn1.text= 'Automatic';
+        }
+    });
+
+    btn2.addEventListener('click', () =>{
+        let type2 = localStorage.getItem("type2")
+        if(type2=="Automatic"){
+            localStorage.setItem("type2","Manual")
+            btn2.text= 'Manual';
+        }else{
+            localStorage.setItem("type2","Automatic");
+            btn2.text = 'Automatic'
+        }
+    });
+    btn3.addEventListener('click', () =>{
+        let type3 = localStorage.getItem("type3")
+        if(type3=="Automatic"){
+            localStorage.setItem("type3","Manual");;
+            btn3.text = 'Manual';
+        }else{
+            localStorage.setItem("type3","Automatic");
+            btn3.text = 'Automatic';
+        }
+    });
+
+    // function logoutAfterInactivity() {
+    //     setTimeout(function() {
+    //       window.location.href = '/';  // 
+    //     },12*60*60 * 1000);  // 30 minutes * 60 seconds * 1000 milliseconds
+    //   }
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     logoutAfterInactivity();
+    // });
+      
+    
+</script>
+
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>
